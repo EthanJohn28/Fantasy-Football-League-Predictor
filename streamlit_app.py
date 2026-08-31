@@ -1,10 +1,7 @@
 import streamlit as st
 import nflreadpy as nfl
 import pandas as pd
-
 from sklearn.linear_model import LinearRegression
-
-
 
 # Page configuration
 st.set_page_config(
@@ -12,8 +9,6 @@ st.set_page_config(
     page_icon="🏈",
     layout="wide"
 )
-
-
 
 # Load data
 @st.cache_data
