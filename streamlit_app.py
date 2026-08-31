@@ -5,10 +5,8 @@ import pandas as pd
 from sklearn.linear_model import LinearRegression
 
 
-# -------------------------
-# Page configuration
-# -------------------------
 
+# Page configuration
 st.set_page_config(
     page_title="Fantasy Football Rankings",
     page_icon="🏈",
@@ -16,10 +14,8 @@ st.set_page_config(
 )
 
 
-# -------------------------
-# Load data
-# -------------------------
 
+# Load data
 @st.cache_data
 def load_data():
     return nfl.load_ff_opportunity(
@@ -30,10 +26,7 @@ def load_data():
 ff_opp = load_data()
 
 
-# -------------------------
 # Model
-# -------------------------
-
 FEATURES = [
     "total_fantasy_points_exp",
     "total_yards_gained_exp",
@@ -64,10 +57,7 @@ def train_model(df):
 model = train_model(ff_opp)
 
 
-# -------------------------
-# Get top players
-# -------------------------
-
+# Get Top Players
 def get_top_players(df, position, model, n=15):
 
     players = (
@@ -121,21 +111,13 @@ def get_top_players(df, position, model, n=15):
     ]
 
 
-# -------------------------
 # Title
-# -------------------------
-
 st.title("🏈 Fantasy Football Rankings")
-
 st.write(
     "Comparing expected fantasy points with model predictions."
 )
 
-
-# -------------------------
 # Sidebar
-# -------------------------
-
 st.sidebar.header("Filters")
 
 season = st.sidebar.selectbox(
@@ -163,19 +145,13 @@ position = st.sidebar.selectbox(
 )
 
 
-# -------------------------
-# Filter season
-# -------------------------
-
+# Filter Season
 current = ff_opp[
     ff_opp["season"] == season
 ].copy()
 
 
-# -------------------------
 # Rankings
-# -------------------------
-
 top_players = get_top_players(
     current,
     position,
@@ -183,10 +159,7 @@ top_players = get_top_players(
 )
 
 
-# -------------------------
 # Display
-# -------------------------
-
 st.subheader(
     f"Top 15 {position}s — {season}"
 )
